@@ -1,13 +1,419 @@
+/* Importa uma fonte moderna e limpa para a aplicação */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* Usa a nova fonte importada */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f7f9fc; /* Um fundo um pouco mais azulado e claro */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- ESTILOS PARA A SIDEBAR RETRÁTIL --- */
+
+.sidebar {
+  width: 240px;
+  background-color: #1f2937; /* Um tom de cinza mais escuro e moderno */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: width 0.3s ease-in-out;
+  position: relative;
+  border-right: 1px solid #e5e7eb;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  height: 80px;
+  border-bottom: 1px solid #374151;
+  overflow: hidden;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: white;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.sidebar.collapsed .logo-text {
+  opacity: 0;
+}
+
+.sidebar-nav {
+  flex-grow: 1;
+  padding: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  text-decoration: none;
+  color: #9ca3af;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-item:hover {
+  background-color: #374151;
+  color: white;
+}
+
+.nav-item.active {
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.nav-item svg {
+  flex-shrink: 0;
+  margin-right: 16px;
+  width: 24px;
+  height: 24px;
+}
+
+.nav-text {
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.sidebar.collapsed .nav-item svg {
+  margin-right: 0;
+}
+
+.sidebar.collapsed .nav-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid #374151;
+}
+
+.sidebar-toggle-wrapper {
+  padding: 16px;
+  border-top: 1px solid #374151;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sidebar.collapsed .sidebar-toggle-wrapper {
+  justify-content: center;
+}
+
+.collapse-button {
+  background-color: #374151;
+  border: none;
+  color: #9ca3af;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+.collapse-button:hover {
+  background-color: #3b82f6;
+  color: white;
+}
+
+/* --- ESTILOS MODERNOS PARA LAYOUT E CONTEÚDO --- */
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Estilo base para os "cards" da aplicação */
+.card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.07), 0 1px 2px -1px rgb(0 0 0 / 0.07);
+  border: 1px solid #e5e7eb;
+  padding: 24px;
+  animation: fadeInUp 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+.table-container, .filter-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.07), 0 1px 2px -1px rgb(0 0 0 / 0.07);
+  border: 1px solid #e5e7eb;
+  padding: 24px;
+  animation: fadeInUp 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.data-table th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #4b5563;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+.data-table tbody tr {
+  transition: background-color 0.2s;
+}
+
+.data-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.actions-cell {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.action-menu-button {
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #6b7280;
+  transition: background-color 0.2s, color 0.2s;
+}
+.action-menu-button:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.action-menu {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  z-index: 10;
+  width: 180px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  animation: fadeInUp 0.2s ease-out forwards;
+  opacity: 0;
+}
+
+.action-menu button {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+}
+
+.action-menu button:hover {
+  background-color: #f3f4f6;
+}
+
+.filter-container {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-group label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.filter-group input, .filter-group select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filter-group input:focus, .filter-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+/* --- NOVOS ESTILOS PARA A DASHBOARD RESPONSIVA --- */
+.dashboard-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr; /* Padrão mobile: uma coluna */
+}
+
+.kpi-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.kpi-title {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.kpi-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.chart-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+}
+
+/* Media queries responsivas */
+@media (min-width: 768px) {
+  .filter-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .full-width-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1280px) {
+  .filter-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .dashboard-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .chart-card {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .data-table thead {
+    display: none;
+  }
+  .data-table, .data-table tbody, .data-table tr, .data-table td {
+    display: block;
+    width: 100%;
+  }
+  .data-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+  }
+  .data-table td {
+    text-align: right;
+    padding-left: 45%;
+    position: relative;
+    border-bottom: 1px solid #f3f4f6;
+    word-wrap: break-word;
+    box-sizing: border-box;
+  }
+  .data-table td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: 40%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: 600;
+    color: #4b5563;
+  }
+  .data-table td:last-child {
+    border-bottom: 0;
+  }
+  .actions-cell {
+    justify-content: flex-end;
+  }
+  .action-menu {
+    right: 15px;
+  }
 }

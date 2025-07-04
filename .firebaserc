@@ -1,0 +1,22 @@
+{
+  "projects": {
+    "default": "intellistock"
+  },
+  "targets": {
+    "intellistock": {
+      "hosting": {
+        "intellistock": [
+          "intellistock"
+        ]
+      }
+    },
+    "intellistock-app-b61c0": {
+      "hosting": {
+        "intellistock": [
+          "1:921778619912:web:3525acca76381561b3b3bd"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
