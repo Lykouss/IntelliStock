@@ -16,8 +16,6 @@ export function AuthProvider({ children }) {
   function login(email, password) { return signInWithEmailAndPassword(auth, email, password); }
   function register(email, password, displayName) {
     return createUserWithEmailAndPassword(auth, email, password).then(cred => {
-      // Definir o displayName diretamente no objeto do utilizador do Firebase Auth
-      // Esta atualização será refletida no `handleUser` quando o estado mudar.
       cred.user.displayName = displayName;
       return cred;
     });
@@ -46,7 +44,6 @@ export function AuthProvider({ children }) {
       let userSnap = await getDoc(userRef);
 
       if (!userSnap.exists()) {
-        // Lógica para quando um utilizador se regista pela primeira vez
         let initialProfile = {
             uid: user.uid,
             email: user.email,
@@ -56,8 +53,6 @@ export function AuthProvider({ children }) {
             activeCompanyId: null
         };
 
-        // CORREÇÃO: A lógica para verificar um convite existente estava errada.
-        // Agora, fazemos uma query correta na coleção 'invites'.
         const invitesRef = collection(db, "invites");
         const q = query(invitesRef, where("email", "==", user.email), limit(1));
         const inviteQuerySnap = await getDocs(q);
@@ -70,7 +65,6 @@ export function AuthProvider({ children }) {
             initialProfile.companyIds.push(inviteData.companyId);
             initialProfile.activeCompanyId = inviteData.companyId;
             
-            // Apaga o convite após ter sido utilizado
             await deleteDoc(doc(db, 'invites', inviteDoc.id));
         }
         
